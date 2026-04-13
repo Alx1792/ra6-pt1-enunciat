@@ -21,7 +21,7 @@ public class TemperatureCalculatorImpl implements TemperatureCalculator {
         double min1 = temperatures.get(0);
         for (Double temperatura : temperatures){
             if(min1>temperatura){
-                min1=temperatura
+                min1=temperatura;
             }
         }
         return min1;
@@ -31,7 +31,7 @@ public class TemperatureCalculatorImpl implements TemperatureCalculator {
         double max1 = temperatures.get(0);
         for (Double temperatura : temperatures){
             if(max1<temperatura){
-                max=temperatura
+                max1=temperatura;
             }
         }
         return max1;
@@ -40,7 +40,7 @@ public class TemperatureCalculatorImpl implements TemperatureCalculator {
     public double average(List<Double> temperatures) {
         double suma= 0.0;
         for (Double temperatura : temperatures){
-            suma += temperatura
+            suma += temperatura;
         }
         double resultat= suma/temperatures.size();
         return resultat;
