@@ -15,10 +15,10 @@ public interface TemperatureRepository extends AutoCloseable {
 
     List<TemperatureRecord> findByCapital(String capital);
 
-    TemperatureRecord findByCapital(String capital, LocalDate date);
+    TemperatureRecord findByCapitalAndDate(String capital, LocalDate date);
 
     boolean exists(String capital, LocalDate date);
 
-    void delete(String capita, LocalDate date);
+    void delete(String capital, LocalDate date);
 }
 

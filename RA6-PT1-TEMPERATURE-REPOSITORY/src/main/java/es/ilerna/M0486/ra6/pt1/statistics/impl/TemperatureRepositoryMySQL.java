@@ -38,4 +38,61 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
         }
 
     }
+    @Override
+    public List<TemperatureRecord> findByCapital(String capital){
+        try{
+            return session.createQuery("FROM TemperatureRecord WHERE capital = :capital", TemperatureRecord.class).setParameter("capital",capital).list();
+        } catch (Exception e) {
+            System.out.println("Error "+ e.getMessage());
+            return null;
+        }
+
+    }
+    @Override
+    public TemperatureRecord findByCapitalAndDate(String capital, LocalDate date){
+        try{
+            return session.createQuery("FROM TemperatureRecord WHERE capital = :capital AND date = :date", TemperatureRecord.class).setParameter("capital",capital).setParameter("date",date).uniqueResult();
+        } catch (Exception e) {
+            System.out.println("Error "+ e.getMessage());
+            return null;
+        }
+    }
+    @Override
+    public boolean exists(String capital, LocalDate date){
+        if(findByCapitalAndDate(capital,date) !=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    @Override
+    public void save(TemperatureRecord record){
+        Transaction t= null;
+        try {
+            t= session.beginTransaction();
+            session.save(record);
+            t.commit();
+        }catch (Exception e){
+            if (t !=null) {
+                t.rollback();
+            }
+            System.out.println("Error"+e.getMessage());
+        }
+
+    }
+    @Override
+    public void delete(String capita, LocalDate date){
+        Transaction t= null;
+        try {
+            t= session.beginTransaction();
+            session.save(record);
+            t.commit();
+        }catch (Exception e){
+            if (t !=null) {
+                t.rollback();
+            }
+            System.out.println("Error"+e.getMessage());
+        }
+
+    }
 }
