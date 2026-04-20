@@ -27,4 +27,15 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
 			System.out.println("Session closed.");
 		}
 	}
+
+    @Override
+    public List<TemperatureRecord> findAll(){
+        try{
+            return session.createQuery("FROM TemperatureRecord", TemperatureRecord.class).list();
+        } catch (Exception e) {
+            System.out.println("Error "+ e.getMessage());
+            return null;
+        }
+
+    }
 }
