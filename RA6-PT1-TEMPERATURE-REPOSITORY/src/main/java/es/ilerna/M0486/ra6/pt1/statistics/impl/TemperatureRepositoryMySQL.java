@@ -71,8 +71,13 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
         Transaction t= null;
         try {
             t= session.beginTransaction();
-            session.save(record);
+            if(exists(record.getCapital(), record.getDate())){
+                System.out.println("[ERROR] Record already exists: "+record.getCapital() + " / " +record.getDate());
+                return;
+            }
+            session.saveOrUpdate(record);
             t.commit();
+            System.out.println("Saved: "+ record);
         }catch (Exception e){
             if (t !=null) {
                 t.rollback();
