@@ -27,7 +27,7 @@ public class TemperatureRecord {
     public TemperatureRecord() {
     }
 
-    public TemperatureRecord(Integer id, String capital, LocalDate date, double maxTemp, double minTemp) {
+    public TemperatureRecord(String capital, LocalDate date, double maxTemp, double minTemp) {
         this.id = id;
         this.capital = capital;
         this.date = date;
@@ -73,5 +73,16 @@ public class TemperatureRecord {
 
     public void setMinTemp(double minTemp) {
         this.minTemp = minTemp;
+    }
+
+    @Override
+    public String toString() {
+        return "TemperatureRecord{" +
+                "id=" + id +
+                ", capital='" + capital + '\'' +
+                ", date=" + date +
+                ", maxTemp=" + maxTemp +
+                ", minTemp=" + minTemp +
+                '}';
     }
 }
