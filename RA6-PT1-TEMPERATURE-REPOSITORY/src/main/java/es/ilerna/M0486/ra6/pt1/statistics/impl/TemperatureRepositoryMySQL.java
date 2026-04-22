@@ -33,7 +33,7 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
         try{
             return session.createQuery("FROM TemperatureRecord", TemperatureRecord.class).list();
         } catch (Exception e) {
-            System.out.println("Error "+ e.getMessage());
+            System.out.println("Error "+e.getMessage());
             return null;
         }
 
@@ -43,7 +43,7 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
         try{
             return session.createQuery("FROM TemperatureRecord WHERE capital = :capital", TemperatureRecord.class).setParameter("capital",capital).list();
         } catch (Exception e) {
-            System.out.println("Error "+ e.getMessage());
+            System.out.println("Error "+e.getMessage());
             return null;
         }
 
@@ -52,8 +52,9 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
     public TemperatureRecord findByCapitalAndDate(String capital, LocalDate date){
         try{
             return session.createQuery("FROM TemperatureRecord WHERE capital = :capital AND date = :date", TemperatureRecord.class).setParameter("capital",capital).setParameter("date",date).uniqueResult();
+            //UNique perque per logica retornara un resultat
         } catch (Exception e) {
-            System.out.println("Error "+ e.getMessage());
+            System.out.println("Error "+e.getMessage());
             return null;
         }
     }
@@ -76,23 +77,22 @@ public class TemperatureRepositoryMySQL implements TemperatureRepository {
             if (t !=null) {
                 t.rollback();
             }
-            System.out.println("Error"+e.getMessage());
+            System.out.println("Error "+e.getMessage());
         }
 
     }
     @Override
-    public void delete(String capita, LocalDate date){
-        Transaction t= null;
-        try {
-            t= session.beginTransaction();
-            session.save(record);
+    public void delete(String capital, LocalDate date){
+        Transaction t = null;
+        try{
+            t = session.beginTransaction();
+            session.createQuery("DELETE FROM TemperatureRecord WHERE capital = :capital AND date = :date").setParameter("capital", capital).setParameter("date", date).executeUpdate();//Diferencia amb select i tal
             t.commit();
-        }catch (Exception e){
-            if (t !=null) {
+        } catch (Exception e){
+            if(t != null){
                 t.rollback();
             }
-            System.out.println("Error"+e.getMessage());
+            System.out.println("Error " +e.getMessage());
         }
-
     }
 }
