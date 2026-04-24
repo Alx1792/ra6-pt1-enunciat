@@ -77,12 +77,11 @@ public class TemperatureRecord {
 
     @Override
     public String toString() {
-        return "TemperatureRecord{" +
-                "id=" + id +
-                ", capital='" + capital + '\'' +
+        return "TemperatureRecord [" +
+                "capital= " + capital  +
                 ", date=" + date +
                 ", maxTemp=" + maxTemp +
                 ", minTemp=" + minTemp +
-                '}';
+                ']';
     }
 }
